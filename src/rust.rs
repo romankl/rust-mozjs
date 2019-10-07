@@ -341,7 +341,7 @@ impl Runtime {
         let filename_cstr = ffi::CString::new(filename.as_bytes()).unwrap();
         debug!("Evaluating script from {} with content {}", filename, script);
         // SpiderMonkey does not approve of null pointers.
-        let (ptr, len) = if script.len() == 0 {
+        let (ptr, len) = if script.is_empty() {
             static empty: &'static [u8] = &[];
             (empty.as_ptr(), 0)
         } else {
